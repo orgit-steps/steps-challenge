@@ -7,13 +7,23 @@ const emptyComment = { name: "", email: "", postId: 0, body: "" };
 export const AddComment = () => {
   const [newComment, setNewComment] = useState(emptyComment);
 
-  const submitForm = () => {
+  const isNewCommentValid = () => {
+      return newComment.name !== "" && newComment.email !== "" && 
+            newComment.body !== "" && newComment.postId > 0;
+  }
+
+  const submitForm = (event: any) => {
+    event.preventDefault();
+
+    if (!isNewCommentValid()) return;
+
     const id = Math.random();
     postComment({ ...newComment, id });
+    setNewComment(emptyComment);
   };
 
   return (
-    <form onSubmit={submitForm}>
+    <form onSubmit={(event) => submitForm(event)}>
       <div className="formTitle">Add A New Comment</div>
       <label>
         Comment Name:

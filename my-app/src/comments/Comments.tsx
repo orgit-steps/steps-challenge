@@ -9,7 +9,7 @@ const SingleComment = (props: { comment: Comment }) => {
   const { comment } = props;
 
   return (
-    <li className="comment" key={comment.id}>
+    <li className="comment">
       <div className="name">{comment.name}</div>
       <div className="commentContent">{comment.body}</div>
       <div className="email">by {comment.email}</div>
@@ -37,7 +37,7 @@ export const Comments = () => {
     <div className="content">
       <ul className="comments">
         {comments.map((comment) => {
-          return <SingleComment comment={comment} />;
+          return <SingleComment comment={comment} key={comment.id}/>;
         })}
       </ul>
       <button className="loadBtn" onClick={() => loadMoreComments(counter)}>
