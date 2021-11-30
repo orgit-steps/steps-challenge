@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from "react";
+import { fetchComments } from "../api";
+import { Comment } from "./types";
+import "./Comments.css";
+
+const NUMBER_COMMENTS_TO_LOAD = 20;
+
+const SingleComment = (props: { comment: Comment }) => {
+  const { comment } = props;
+
+  return (
+    <li className="comment" key={comment.id}>
+      <div className="name">{comment.name}</div>
+      <div className="commentContent">{comment.body}</div>
+      <div className="email">by {comment.email}</div>
+      <div className="postId">related to post no. {comment.postId}</div>
+    </li>
+  );
+};
+
+export const Comments = () => {
+  const [counter, setCounter] = useState(0);
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  const loadMoreComments = (index: number) => {
+    fetchComments(index, NUMBER_COMMENTS_TO_LOAD).then((newComments) => {
+      setComments((prev) => [...prev, ...newComments]);
+      setCounter((prev) => prev + NUMBER_COMMENTS_TO_LOAD);
+    });
+  };
+
+  useEffect(() => {
+    loadMoreComments(0);
+  }, []);
+
+  return (
+    <div className="content">
+      <ul className="comments">
+        {comments.map((comment) => {
+          return <SingleComment comment={comment} />;
+        })}
+      </ul>
+      <button className="loadBtn" onClick={() => loadMoreComments(counter)}>
+        See More Comments
+      </button>
+    </div>
+  );
+};

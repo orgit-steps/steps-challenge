@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  margin: auto;
+  gap: 10px
+}
+
+.appTitle {
+  font-size: 35px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  line-height: 40px;
+  font-weight: 600;
+}

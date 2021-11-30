@@ -1,0 +1,42 @@
+form {
+    display: flex;
+     justify-content: center;
+     flex-direction: column;
+     width: 350px;
+     border: 2px solid #9898FF;
+     border-radius: 4px;
+     padding: 5px;
+     align-items: center;
+     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ }
+ 
+ .formTitle {
+     margin-bottom: 10px;
+     border-bottom: 2px solid lightgray;
+     width: 100%;
+ }
+ 
+ label {
+     justify-content: space-between;
+     width: 100%;
+     display: flex;
+ }
+ 
+ .submitBtn {
+     margin-top: 10px;
+     background: #FFFFFF;
+     border: 1px solid #9898FF;
+     border-radius: 29px;
+     cursor: pointer;
+     height: 30px;
+     font-size: 16px;
+     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ }
+ 
+ .submitBtn:hover {
+     color: #9898FF;
+ }
+ 
+ .newCommentInput {
+     width: 174px;
+ }
