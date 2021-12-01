@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchComments } from "../api";
+import { LoaderComponent } from "../LoaderComponent";
 import { Comment } from "../types";
 import "./Comments.css";
 
@@ -35,14 +36,20 @@ export const Comments = () => {
 
   return (
     <div className="content">
-      <ul className="comments">
-        {comments.map((comment) => {
-          return <SingleComment comment={comment} key={comment.id}/>;
-        })}
-      </ul>
-      <button className="loadBtn" onClick={() => loadMoreComments(counter)}>
-        See More Comments
-      </button>
+        {
+            comments.length === 0 ? 
+                <LoaderComponent type="Puff" color="#00BFFF" height={100} width={200}/> :
+                <>
+                    <ul className="comments">
+                        {comments.map((comment) => {
+                        return <SingleComment comment={comment} key={comment.id}/>;
+                        })}
+                    </ul>
+                    <button className="loadBtn" onClick={() => loadMoreComments(counter)}>
+                        See More Comments
+                    </button>
+                </>
+      }
     </div>
   );
 };
