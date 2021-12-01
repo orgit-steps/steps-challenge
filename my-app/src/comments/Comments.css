@@ -1,15 +1,11 @@
 .comments {
     list-style: none;
-    /* border: 2px solid #9898FF ; */
     width: 500px;
-    /* overflow-y: scroll; */
-    /* max-height: 850px; */
     min-height: 100px;
     display: flex;
     flex-direction: column;
     padding: 0;
     gap: 10px;
-    /* background-color: #F8F8FB; */
     border-radius: 4px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
@@ -44,20 +40,6 @@
 
 .postId {
     font-size: 12px;
-}
-
-.loadBtn {
-    background: #FFFFFF;
-    border: 1px solid #9898FF;
-    border-radius: 29px;
-    cursor: pointer;
-    height: 30px;
-    font-size: 16px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-.loadBtn:hover {
-    color: #9898FF;
 }
 
 li:nth-child(odd) {

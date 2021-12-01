@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchComments } from "../api";
-import { Comment } from "./types";
+import { Comment } from "../types";
 import "./Comments.css";
 
 const NUMBER_COMMENTS_TO_LOAD = 20;

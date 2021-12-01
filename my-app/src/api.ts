@@ -1,4 +1,4 @@
-import {Comment} from "./comments/types";
+import {Comment} from "./types";
 
 const requestOptions = {
     method: 'POST',

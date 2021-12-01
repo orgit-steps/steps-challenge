@@ -6,7 +6,12 @@ const MAX_ID = 100;
 const MIN_ID = 1;
 const EMPTY_COMMENT = { name: "", email: "", postId: 1, body: "" };
 
-export const AddComment = () => {
+interface AddCommentProps {
+    handleCloseForm: () => void;
+};
+
+export const AddComment = (props: AddCommentProps) => {
+  const {handleCloseForm} = props;
   const [newComment, setNewComment] = useState(EMPTY_COMMENT);
   const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
 
@@ -27,11 +32,20 @@ export const AddComment = () => {
     postComment({ ...newComment, id });
     setNewComment(EMPTY_COMMENT);
     setErrorMsg(undefined);
+    handleCloseForm();
   };
+
+  const closeForm = (event: any) => {
+    event.preventDefault();
+    handleCloseForm();
+  }
 
   return (
     <form onSubmit={submitForm}>
-      <div className="formTitle">Add A New Comment</div>
+        <div className="header">
+            <div className="formTitle">Add A New Comment</div>
+            <button className="closeBtn" onClick={closeForm}>X</button>
+        </div>
       <label>
         Comment Name:
         <input
