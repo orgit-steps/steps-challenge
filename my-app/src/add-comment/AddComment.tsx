@@ -2,28 +2,35 @@ import { useState } from "react";
 import "./AddComment.css";
 import { postComment } from "../api";
 
-const emptyComment = { name: "", email: "", postId: 0, body: "" };
+const MAX_ID = 100;
+const MIN_ID = 1;
+const EMPTY_COMMENT = { name: "", email: "", postId: 1, body: "" };
 
 export const AddComment = () => {
-  const [newComment, setNewComment] = useState(emptyComment);
+  const [newComment, setNewComment] = useState(EMPTY_COMMENT);
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(undefined);
 
   const isNewCommentValid = () => {
       return newComment.name !== "" && newComment.email !== "" && 
-            newComment.body !== "" && newComment.postId > 0;
+            newComment.body !== "";
   }
 
   const submitForm = (event: any) => {
     event.preventDefault();
 
-    if (!isNewCommentValid()) return;
+    if (!isNewCommentValid()) {
+        setErrorMsg("One of the fields is empty or inccorect. Please fix it and try again!");
+        return;
+    };
 
-    const id = Math.random();
+    const id = Math.floor(Math.random() * (MAX_ID - MIN_ID + 1)) + MIN_ID;
     postComment({ ...newComment, id });
-    setNewComment(emptyComment);
+    setNewComment(EMPTY_COMMENT);
+    setErrorMsg(undefined);
   };
 
   return (
-    <form onSubmit={(event) => submitForm(event)}>
+    <form onSubmit={submitForm}>
       <div className="formTitle">Add A New Comment</div>
       <label>
         Comment Name:
@@ -42,6 +49,7 @@ export const AddComment = () => {
       <label>
         Comment Content:
         <textarea
+        className="newCommentInput"
           value={newComment.body}
           onChange={(event) =>
             setNewComment((prev) => {
@@ -54,6 +62,7 @@ export const AddComment = () => {
       <label>
         Related to post no.:
         <input
+          min="1"
           className="newCommentInput"
           type="number"
           value={newComment.postId}
@@ -79,6 +88,7 @@ export const AddComment = () => {
         />
       </label>
       <input type="submit" value="send" className="submitBtn" />
+      {errorMsg && <div className="errorMsg">{errorMsg}</div>}
     </form>
   );
 };
